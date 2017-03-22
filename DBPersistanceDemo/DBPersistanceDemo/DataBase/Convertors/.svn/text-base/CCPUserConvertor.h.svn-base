@@ -1,0 +1,14 @@
+//
+//  UserConvertor.h
+//  DBPersistance
+//
+//  Created by YNKJMACMINI2 on 15/12/17.
+//  Copyright © 2015年 YNKJMACMINI2. All rights reserved.
+//
+
+#import "DBPConvertor.h"
+#import "DBPConvertorProtocol.h"
+
+@interface CCPUserConvertor : DBPConvertor<DBPConvertorProtocol>
+
+@end

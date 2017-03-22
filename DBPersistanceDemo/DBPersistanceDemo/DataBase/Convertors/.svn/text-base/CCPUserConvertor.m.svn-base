@@ -1,0 +1,35 @@
+//
+//  UserConvertor.m
+//  DBPersistance
+//
+//  Created by YNKJMACMINI2 on 15/12/17.
+//  Copyright © 2015年 YNKJMACMINI2. All rights reserved.
+//
+
+#import "CCPUserConvertor.h"
+#import "CCPDBContant.h"
+#import "YNCCProduct-Swift.h"
+
+@implementation CCPUserConvertor
+
+-(NSDictionary<NSString*,NSDictionary<NSString*,NSString*>*> *)supportedClassMap
+{
+    return @{[[CCPUser class] description]:@{User_Id:@"userId",
+                                             User_Name:@"name",
+                                             User_Password:@"password",
+                                             User_PortraitUri:@"portraitUri",
+                                             User_Tel:@"tel",
+                                             User_Email:@"email",
+                                             User_Address:@"address",
+                                             User_DepartmentID:@"departmentID",
+                                             User_DepartmentName:@"departmentName",
+                                             //User_RefreshEnabled:@"refreshEnabled",
+                                             //User_RefreshInterval:@"refreshInterval",
+                                             User_ThemeID:@"themeID",
+                                             User_GesturePassword:@"gesturePassword",
+                                             User_Token:@"token",
+                                             User_Role:@"role"
+                                             }
+             };
+}
+@end

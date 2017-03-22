@@ -1,0 +1,12 @@
+
+use_frameworks!
+
+def pods
+    
+    pod 'FMDB/SQLCipher' , '~> 2.6.2'
+    
+end
+
+target 'DBPersistanceDemo' do
+    pods
+end

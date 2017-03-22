@@ -1,0 +1,50 @@
+//
+//  UserTableOperator.m
+//  DBPersistance
+//
+//  Created by YNKJMACMINI2 on 15/12/11.
+//  Copyright © 2015年 YNKJMACMINI2. All rights reserved.
+//
+
+#import "CCPUserTableOperator.h"
+#import "CCPDBContant.h"
+#import "CCPUserConvertor.h"
+
+@implementation CCPUserTableOperator
+
+-(NSString*)tableName
+{
+    return Table_User;
+}
+
+-(NSDictionary*)columns
+{
+    return @{User_Id:@"TEXT PRIMARY KEY",
+             User_Name:@"TEXT",
+             User_Password:@"TEXT",
+             User_PortraitUri:@"TEXT",
+             User_Tel:@"TEXT",
+             User_Email:@"TEXT",
+             User_Address:@"TEXT",
+             User_DepartmentID:@"TEXT",
+             User_DepartmentName:@"TEXT",
+             //User_RefreshEnabled:@"BLOB",
+             //User_RefreshInterval:@"INTEGER",
+             User_ThemeID:@"TEXT",
+             User_GesturePassword:@"TEXT",
+             User_Token:@"TEXT",
+             User_Role:@"TEXT"
+             };
+}
+
+-(NSArray*)primaryKeys
+{
+    return @[User_Id];
+}
+
+-(Class)convertorClass
+{
+    return [CCPUserConvertor class];
+}
+
+@end
