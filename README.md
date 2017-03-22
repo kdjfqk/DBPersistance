@@ -3,7 +3,7 @@
 
 ## 类说明
 ### DBPTableOperator
-* 类是该类库的核心类，提供了增删改查方法，每种操作都提供了字典和Model类型两种API
+* DBPTableOperator是类库的核心类，提供了增删改查方法，每种操作都提供了字典和Model类型两种API
 * 开发者需要为每个表创建一个DBPTableOperator的子类
 
 #### Insert
@@ -214,7 +214,7 @@ TableOperator协议，所有继承DBPTableOperator的子类必须实现该协议
 
 ## DBPConvertor
 * Convertor类定义了数据库表字段与Model属性之间的对应关系
-* 如果想要直接存取Model对象，则必须为表创建Convertor的子类
+* 如果直接存取Model对象，则必须为表创建Convertor的子类
 * 开发者不会直接使用DBPConvertor的方法，只需要继承该类，并实现DBPConvertorProtocol协议即可
 
 ## DBPConvertorProtocol
