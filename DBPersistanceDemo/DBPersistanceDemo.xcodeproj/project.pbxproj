@@ -34,6 +34,14 @@
 		390F80D11E81090D00CCB5A1 /* UserConvertor.m in Sources */ = {isa = PBXBuildFile; fileRef = 390F80CD1E81090D00CCB5A1 /* UserConvertor.m */; };
 		390F80D21E81090D00CCB5A1 /* UserTableOperator.m in Sources */ = {isa = PBXBuildFile; fileRef = 390F80D01E81090D00CCB5A1 /* UserTableOperator.m */; };
 		390F80D51E81093100CCB5A1 /* User.m in Sources */ = {isa = PBXBuildFile; fileRef = 390F80D41E81093100CCB5A1 /* User.m */; };
+		393A7B651E8365BC00717252 /* DetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 393A7B641E8365BC00717252 /* DetailViewController.m */; };
+		396D832B1E8373160001D477 /* HCGDatePicker.m in Sources */ = {isa = PBXBuildFile; fileRef = 396D83281E8373160001D477 /* HCGDatePicker.m */; };
+		396D832C1E8373160001D477 /* HCGDatePickerAppearance.m in Sources */ = {isa = PBXBuildFile; fileRef = 396D832A1E8373160001D477 /* HCGDatePickerAppearance.m */; };
+		396D83351E8375030001D477 /* Address.plist in Resources */ = {isa = PBXBuildFile; fileRef = 396D832E1E8375030001D477 /* Address.plist */; };
+		396D83361E8375030001D477 /* LZCityPickerController.m in Sources */ = {isa = PBXBuildFile; fileRef = 396D83301E8375030001D477 /* LZCityPickerController.m */; };
+		396D83371E8375030001D477 /* LZCityPickerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 396D83321E8375030001D477 /* LZCityPickerView.m */; };
+		396D83381E8375030001D477 /* LZPickerModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 396D83341E8375030001D477 /* LZPickerModel.m */; };
+		39EE09C21E88DD640094A82A /* DBTypeConvertor.m in Sources */ = {isa = PBXBuildFile; fileRef = 39EE09C11E88DD640094A82A /* DBTypeConvertor.m */; };
 		78D5031DF4FF3367E01B52EE /* Pods_DBPersistanceDemo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 803A5C6855B1A84C4512F1AC /* Pods_DBPersistanceDemo.framework */; };
 /* End PBXBuildFile section */
 
@@ -94,8 +102,6 @@
 		390F80A21E81072A00CCB5A1 /* DBPSqlCriterion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPSqlCriterion.m; sourceTree = "<group>"; };
 		390F80A31E81072A00CCB5A1 /* DBPWhereCondition.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPWhereCondition.h; sourceTree = "<group>"; };
 		390F80A41E81072A00CCB5A1 /* DBPWhereCondition.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPWhereCondition.m; sourceTree = "<group>"; };
-		390F80A61E81072A00CCB5A1 /* DBPConvertorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPConvertorProtocol.h; sourceTree = "<group>"; };
-		390F80A71E81072A00CCB5A1 /* DBPTableOperatorProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPTableOperatorProtocol.h; sourceTree = "<group>"; };
 		390F80AA1E81072A00CCB5A1 /* DBPSqlBuilder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPSqlBuilder.h; sourceTree = "<group>"; };
 		390F80AB1E81072A00CCB5A1 /* DBPSqlBuilder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBPSqlBuilder.m; sourceTree = "<group>"; };
 		390F80AD1E81072A00CCB5A1 /* DBPTableOperator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBPTableOperator.h; sourceTree = "<group>"; };
@@ -115,6 +121,21 @@
 		390F80D01E81090D00CCB5A1 /* UserTableOperator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UserTableOperator.m; sourceTree = "<group>"; };
 		390F80D31E81093100CCB5A1 /* User.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = User.h; sourceTree = "<group>"; };
 		390F80D41E81093100CCB5A1 /* User.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = User.m; sourceTree = "<group>"; };
+		393A7B631E8365BC00717252 /* DetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailViewController.h; sourceTree = "<group>"; };
+		393A7B641E8365BC00717252 /* DetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailViewController.m; sourceTree = "<group>"; };
+		396D83271E8373160001D477 /* HCGDatePicker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCGDatePicker.h; sourceTree = "<group>"; };
+		396D83281E8373160001D477 /* HCGDatePicker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCGDatePicker.m; sourceTree = "<group>"; };
+		396D83291E8373160001D477 /* HCGDatePickerAppearance.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HCGDatePickerAppearance.h; sourceTree = "<group>"; };
+		396D832A1E8373160001D477 /* HCGDatePickerAppearance.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HCGDatePickerAppearance.m; sourceTree = "<group>"; };
+		396D832E1E8375030001D477 /* Address.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Address.plist; sourceTree = "<group>"; };
+		396D832F1E8375030001D477 /* LZCityPickerController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZCityPickerController.h; sourceTree = "<group>"; };
+		396D83301E8375030001D477 /* LZCityPickerController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZCityPickerController.m; sourceTree = "<group>"; };
+		396D83311E8375030001D477 /* LZCityPickerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZCityPickerView.h; sourceTree = "<group>"; };
+		396D83321E8375030001D477 /* LZCityPickerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZCityPickerView.m; sourceTree = "<group>"; };
+		396D83331E8375030001D477 /* LZPickerModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LZPickerModel.h; sourceTree = "<group>"; };
+		396D83341E8375030001D477 /* LZPickerModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LZPickerModel.m; sourceTree = "<group>"; };
+		39EE09C01E88DD640094A82A /* DBTypeConvertor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBTypeConvertor.h; sourceTree = "<group>"; };
+		39EE09C11E88DD640094A82A /* DBTypeConvertor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBTypeConvertor.m; sourceTree = "<group>"; };
 		47607A0DFB00F07E12220952 /* Pods-DBPersistanceDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DBPersistanceDemo.release.xcconfig"; path = "Pods/Target Support Files/Pods-DBPersistanceDemo/Pods-DBPersistanceDemo.release.xcconfig"; sourceTree = "<group>"; };
 		803A5C6855B1A84C4512F1AC /* Pods_DBPersistanceDemo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DBPersistanceDemo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -179,12 +200,15 @@
 		390F804E1E8106FD00CCB5A1 /* DBPersistanceDemo */ = {
 			isa = PBXGroup;
 			children = (
+				396D83251E8373160001D477 /* Utils */,
 				390F80891E81072A00CCB5A1 /* Lib */,
 				390F80821E81072A00CCB5A1 /* DataBase */,
 				390F80521E8106FD00CCB5A1 /* AppDelegate.h */,
 				390F80531E8106FD00CCB5A1 /* AppDelegate.m */,
 				390F80551E8106FD00CCB5A1 /* ViewController.h */,
 				390F80561E8106FD00CCB5A1 /* ViewController.m */,
+				393A7B631E8365BC00717252 /* DetailViewController.h */,
+				393A7B641E8365BC00717252 /* DetailViewController.m */,
 				390F80581E8106FD00CCB5A1 /* Main.storyboard */,
 				390F805B1E8106FD00CCB5A1 /* Assets.xcassets */,
 				390F805D1E8106FD00CCB5A1 /* LaunchScreen.storyboard */,
@@ -241,7 +265,6 @@
 				390F80901E81072A00CCB5A1 /* FMEncrypt */,
 				390F80971E81072A00CCB5A1 /* Managers */,
 				390F809C1E81072A00CCB5A1 /* Models */,
-				390F80A51E81072A00CCB5A1 /* Protocals */,
 				390F80A81E81072A00CCB5A1 /* Setting */,
 				390F80A91E81072A00CCB5A1 /* SqlBuilder */,
 				390F80AC1E81072A00CCB5A1 /* Tables */,
@@ -261,6 +284,7 @@
 		390F808C1E81072A00CCB5A1 /* Convertor */ = {
 			isa = PBXGroup;
 			children = (
+				39EE09BF1E88DD350094A82A /* DBTypeConvertor */,
 				390F808D1E81072A00CCB5A1 /* DBPConvertor.h */,
 				390F808E1E81072A00CCB5A1 /* DBPConvertor.m */,
 			);
@@ -304,15 +328,6 @@
 				390F80A41E81072A00CCB5A1 /* DBPWhereCondition.m */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		390F80A51E81072A00CCB5A1 /* Protocals */ = {
-			isa = PBXGroup;
-			children = (
-				390F80A61E81072A00CCB5A1 /* DBPConvertorProtocol.h */,
-				390F80A71E81072A00CCB5A1 /* DBPTableOperatorProtocol.h */,
-			);
-			path = Protocals;
 			sourceTree = "<group>";
 		};
 		390F80A81E81072A00CCB5A1 /* Setting */ = {
@@ -371,6 +386,49 @@
 				390F80D01E81090D00CCB5A1 /* UserTableOperator.m */,
 			);
 			path = Tables;
+			sourceTree = "<group>";
+		};
+		396D83251E8373160001D477 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				396D832D1E8375030001D477 /* LZCityPickerClass */,
+				396D83261E8373160001D477 /* HcgDatePicker */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		396D83261E8373160001D477 /* HcgDatePicker */ = {
+			isa = PBXGroup;
+			children = (
+				396D83271E8373160001D477 /* HCGDatePicker.h */,
+				396D83281E8373160001D477 /* HCGDatePicker.m */,
+				396D83291E8373160001D477 /* HCGDatePickerAppearance.h */,
+				396D832A1E8373160001D477 /* HCGDatePickerAppearance.m */,
+			);
+			path = HcgDatePicker;
+			sourceTree = "<group>";
+		};
+		396D832D1E8375030001D477 /* LZCityPickerClass */ = {
+			isa = PBXGroup;
+			children = (
+				396D832E1E8375030001D477 /* Address.plist */,
+				396D832F1E8375030001D477 /* LZCityPickerController.h */,
+				396D83301E8375030001D477 /* LZCityPickerController.m */,
+				396D83311E8375030001D477 /* LZCityPickerView.h */,
+				396D83321E8375030001D477 /* LZCityPickerView.m */,
+				396D83331E8375030001D477 /* LZPickerModel.h */,
+				396D83341E8375030001D477 /* LZPickerModel.m */,
+			);
+			path = LZCityPickerClass;
+			sourceTree = "<group>";
+		};
+		39EE09BF1E88DD350094A82A /* DBTypeConvertor */ = {
+			isa = PBXGroup;
+			children = (
+				39EE09C01E88DD640094A82A /* DBTypeConvertor.h */,
+				39EE09C11E88DD640094A82A /* DBTypeConvertor.m */,
+			);
+			path = DBTypeConvertor;
 			sourceTree = "<group>";
 		};
 		C3734832314BE722D00BAD42 /* Frameworks */ = {
@@ -494,6 +552,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				390F805F1E8106FD00CCB5A1 /* LaunchScreen.storyboard in Resources */,
+				396D83351E8375030001D477 /* Address.plist in Resources */,
 				390F805C1E8106FD00CCB5A1 /* Assets.xcassets in Resources */,
 				390F805A1E8106FD00CCB5A1 /* Main.storyboard in Resources */,
 			);
@@ -570,12 +629,17 @@
 			files = (
 				390F80BB1E81072A00CCB5A1 /* FMEncryptDatabase.m in Sources */,
 				390F80C61E81072A00CCB5A1 /* DBPFileUtil.m in Sources */,
+				393A7B651E8365BC00717252 /* DetailViewController.m in Sources */,
+				396D83381E8375030001D477 /* LZPickerModel.m in Sources */,
 				390F80D21E81090D00CCB5A1 /* UserTableOperator.m in Sources */,
 				390F80BF1E81072A00CCB5A1 /* DBPManager.m in Sources */,
 				390F80D11E81090D00CCB5A1 /* UserConvertor.m in Sources */,
 				390F80C81E81072A00CCB5A1 /* NSObject+DBPExtension.m in Sources */,
 				390F80D51E81093100CCB5A1 /* User.m in Sources */,
+				396D832B1E8373160001D477 /* HCGDatePicker.m in Sources */,
 				390F80C51E81072A00CCB5A1 /* DBPTableOperator.m in Sources */,
+				396D83361E8375030001D477 /* LZCityPickerController.m in Sources */,
+				396D832C1E8373160001D477 /* HCGDatePickerAppearance.m in Sources */,
 				390F80BD1E81072A00CCB5A1 /* FMEncryptHelper.m in Sources */,
 				390F80BA1E81072A00CCB5A1 /* DBPConvertor.m in Sources */,
 				390F80C21E81072A00CCB5A1 /* DBPSqlCriterion.m in Sources */,
@@ -590,6 +654,8 @@
 				390F80511E8106FD00CCB5A1 /* main.m in Sources */,
 				390F80C11E81072A00CCB5A1 /* DBPSqlBuilderResult.m in Sources */,
 				390F80C01E81072A00CCB5A1 /* DBPOrderByItem.m in Sources */,
+				396D83371E8375030001D477 /* LZCityPickerView.m in Sources */,
+				39EE09C21E88DD640094A82A /* DBTypeConvertor.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

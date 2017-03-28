@@ -7,7 +7,6 @@
 //
 
 #import "DBPTableOperator.h"
-#import "DBPTableOperatorProtocol.h"
 #import "DBPManager.h"
 #import "DBPEncryptManager.h"
 #import "DBPSqlBuilder.h"

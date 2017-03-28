@@ -11,12 +11,10 @@
 
 #import "DBPManager.h"
 #import "DBPTableOperator.h"
-#import "DBPTableOperatorProtocol.h"
 #import "DBPSqlCriterion.h"
 #import "DBPWhereCondition.h"
 #import "DBPOrderByItem.h"
 #import "DBPConvertor.h"
-#import "DBPConvertorProtocol.h"
 #import "NSDate+DBPExtension.h"
 #import "NSString+DBPExtension.h"
 

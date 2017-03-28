@@ -7,13 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <UIKit/UIKit.h>
+
+@interface Address : NSObject<NSCoding>
+@property (strong,nonatomic) NSString *province;
+@property (strong,nonatomic) NSString *city;
+@property (strong,nonatomic) NSString *area;
+@end
 
 @interface User : NSObject
 @property (strong,nonatomic) NSString *userId;
-@property (strong,nonatomic) NSString *userPrimaryID;
-@property (strong,nonatomic) NSString *name;
-@property (strong,nonatomic) NSString *portraitUri;
-@property (strong,nonatomic) NSString *tel;
-@property (strong,nonatomic) NSString *email;
-@property (strong,nonatomic) NSString *address;
+@property (assign,nonatomic) NSInteger age;
+@property (strong,nonatomic) NSDate *birthday;
+@property (assign,nonatomic) CGFloat height;
+@property (assign,nonatomic) BOOL married;
+@property (strong,nonatomic) Address *address;
 @end
+

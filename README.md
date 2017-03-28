@@ -224,14 +224,52 @@ Convertor协议，所有继承DBPConvertor的子类必须实现该协议
 /**
  *	@brief 提供 该Convertor支持转换的类，以及表字段与类属性之间的对应关系 信息
  *
- *	@return 返回 NSDictionary<NSString*,NSDictionary<NSString*,NSString*>*> 类型的字典
+ *	@return 返回 NSDictionary<NSString*,NSDictionary<NSString*,DBPConvertorMapItem*>*> 类型的字典
  *
  *  @return 键 NSString：支持转换的类的名称
  *
- *  @return 值 NSDictionary<NSString*,NSString*>：表字段与Class类型属性之间的对应关系字典，其中key为表字段名称，value为类型属性名称
+ *  @return 值 NSDictionary<NSString*,NSString*>：表字段与Class类型属性之间的对应关系字典，其中key为表字段名称，value为DBPConvertorMapItem类型
  */
--(NSDictionary<NSString*,NSDictionary<NSString*,NSString*>*> *)supportedClassMap;
+-(NSDictionary<NSString*,NSDictionary<NSString*,DBPConvertorMapItem*>*> *)supportedClassMap;
 ```
+
+## DBPTypeConvertorProtocol
+* 数据库字段类型和Model属性类型之间进行转换的协议
+* 数据库类型支持：INTEGER、TEXT、BLOB、REAL
+* Model字段支持：NSInteger、BOOL、CGFloat、NSString、NSDate、NSData、自定义Class
+* 数据库字段 与 Model字段对应关系：
+
+| Model字段 | 数据库类型|
+| ------------ | -----|
+| NSInteger | INTEGER | 
+| BOOL      | INTEGER |
+| CGFloat   | REAL    |
+| NSString  | TEXT    |
+| NSDate    | TEXT    |
+| NSData    | BLOB    |
+| 自定义Class| BLOB    |
+
+* 类库提供了`DBDefaultTypeConvertor` `DBFloatTypeConvertor` `DBDateTypeConvertor` `DBCustomObjTypeConvertor` `DBNullTypeConvertor`转化器，其它类型需要开发者自定义实现`DBPTypeConvertorProtocol`协议的转换类
+
+```
+/**
+ *	@brief iOS类型转换为DB类型
+ *
+ *	@param value iOS类型值
+ *
+ *	@return DB类型值
+ */
+-(id)convertToDBType:(id)value;
+/**
+ *	@brief DB类型转换为iOS类型
+ *
+ *	@param obj 对象实例
+ *	@param name 对象属性名称
+ *	@param value DB类型值
+ */
+-(void)convertToObjType:(NSObject*)obj propertyName:(NSString*)name  propertyDBValue:(NSData*)value;
+```
+
 
 ## 使用说明
 
@@ -247,7 +285,7 @@ Convertor协议，所有继承DBPConvertor的子类必须实现该协议
 #### 为每个表创建Convertor类
 * 该类必须继承`DBPConvertor`，并实现`DBPConvertorProtocol`协议
 * 可以为一张表创建多个Convertor，然后在TableOperator的convertorClass方法中写具体使用哪个Convertor的判断逻辑
-> Convertor类定义了数据库表字段与Model属性之间的对应关系，会有硬编码问题，为了后期方便维护，建议使用单独的文件定义表名称和字段名称
+> Convertor类定义了数据库表字段与Model属性之间的对应关系，以及DB类型与Model类型之间转换的类类型，会有硬编码问题，为了后期方便维护，建议使用单独的文件定义表名称和字段名称
 
 #### AppDelegate中设置是否启用数据库加密
 * 默认为启用

@@ -20,11 +20,11 @@
 -(NSDictionary*)columns
 {
     return @{User_Id:@"TEXT PRIMARY KEY",
-             User_Name:@"TEXT",
-             User_PortraitUri:@"TEXT",
-             User_Tel:@"TEXT",
-             User_Email:@"TEXT",
-             User_Address:@"TEXT",
+             User_Age:@"INTEGER",
+             User_Birthday:@"TEXT",
+             User_Height:@"REAL",
+             User_Married:@"INTEGER",
+             User_Address:@"BLOB",
              };
 }
 

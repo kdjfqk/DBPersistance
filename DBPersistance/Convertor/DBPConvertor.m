@@ -7,12 +7,27 @@
 //
 
 #import "DBPConvertor.h"
-#import "DBPConvertorProtocol.h"
 #import "NSObject+DBPExtension.h"
 #import "NSDate+DBPExtension.h"
 #import "NSString+DBPExtension.h"
 #import "DBPConfiguration.h"
+#import "DBTypeConvertor.h"
 
+#pragma DBPConvertorMapItem
+@implementation DBPConvertorMapItem
+
+-(instancetype)initWithPropertyName:(NSString*)name typeConvertor:(Class)convertor{
+    self = [super init];
+    if(self){
+        self.propertyName = name;
+        self.typeConvertor = convertor;
+    }
+    return self;
+}
+@end
+
+
+#pragma DBPConvertor
 @interface DBPConvertor()
 @property (nonatomic, weak) id<DBPConvertorProtocol> child;
 @end
@@ -34,23 +49,27 @@
 -(NSDictionary *)convertToDictionaryWithObject:(id)obj
 {
     NSMutableDictionary *result =[[NSMutableDictionary alloc] init];
-    NSDictionary<NSString*,NSDictionary<NSString*,NSString*>*> *supportedClassMap = [self.child supportedClassMap];
-    [supportedClassMap enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, NSDictionary<NSString *,NSString *> * _Nonnull map, BOOL * _Nonnull stop) {
+    NSDictionary<NSString*,NSDictionary<NSString*,DBPConvertorMapItem*>*> *supportedClassMap = [self.child supportedClassMap];
+    [supportedClassMap enumerateKeysAndObjectsUsingBlock:^(NSString *  _Nonnull key, NSDictionary<NSString *,DBPConvertorMapItem *> * _Nonnull map, BOOL * _Nonnull stop) {
         if ([[[obj class] description] isEqualToString:key]) {
             *stop = YES;
-            [map enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull coloumnName, NSString * _Nonnull propertyName, BOOL * _Nonnull stop) {
+            [map enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull coloumnName, DBPConvertorMapItem * _Nonnull mapItem, BOOL * _Nonnull stop) {
                 //检查是obj中是否有该属性，没有则抛异常
-                if (![obj hasProperty:propertyName]) {
-                    NSException *exp = [[NSException alloc]  initWithName:@"convert Object to NSDictionary error" reason:[NSString stringWithFormat:@"can't find the %@ property in %@ Class",propertyName,key] userInfo:nil];
+                if (![obj hasProperty:mapItem.propertyName]) {
+                    NSException *exp = [[NSException alloc]  initWithName:@"convert Object to NSDictionary error" reason:[NSString stringWithFormat:@"can't find the %@ property in %@ Class",mapItem.propertyName,key] userInfo:nil];
                     @throw exp;
                 }
-                id propertyValue = [obj valueForKey:propertyName];
-                //对于NSDate类型的数据，将其转换为NSString类型，再放入字典
-                if ([propertyValue isKindOfClass:[NSDate class]]) {
-                    propertyValue = [((NSDate*)propertyValue) toString:DBDateFormatString];
-                }
-                if (propertyValue==nil) {
-                    propertyValue = [NSNull null];
+                id propertyValue = [obj valueForKey:mapItem.propertyName];
+                if(propertyValue == nil){
+                    propertyValue = [[[DBNullTypeConvertor alloc] init] convertToDBType:propertyValue];
+                }else{
+                    if(mapItem.typeConvertor == nil){
+                        propertyValue = [[[DBDefaultTypeConvertor alloc] init] convertToDBType:propertyValue];
+                    }else{
+                        Class convClass = mapItem.typeConvertor;
+                        id<DBPTypeConvertorProtocol> convertor = [[convClass alloc] init];
+                        propertyValue = [convertor convertToDBType:propertyValue];
+                    }
                 }
                 [result setObject:propertyValue forKey:coloumnName];
             }];
@@ -62,27 +81,23 @@
 -(id)convertToObjectWithDictionary:(NSDictionary*)dic destClass:(Class)destClass
 {
     id obj = [[destClass alloc] init];
-    NSDictionary<NSString*,NSDictionary<NSString*,NSString*>*> *supportedClassMap = [self.child supportedClassMap];
-    [supportedClassMap enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary<NSString *,NSString *> * _Nonnull map, BOOL * _Nonnull stop) {
+    NSDictionary<NSString*,NSDictionary<NSString*,DBPConvertorMapItem*>*> *supportedClassMap = [self.child supportedClassMap];
+    [supportedClassMap enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull key, NSDictionary<NSString *,DBPConvertorMapItem *> * _Nonnull map, BOOL * _Nonnull stop) {
         if ([[destClass description] isEqualToString:key]) {
             *stop=YES;
-            [map enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull coloumnName, NSString * _Nonnull propertyName, BOOL * _Nonnull stop) {
+            [map enumerateKeysAndObjectsUsingBlock:^(NSString * _Nonnull coloumnName, DBPConvertorMapItem * _Nonnull mapItem, BOOL * _Nonnull stop) {
                 if([dic[coloumnName] isKindOfClass:[NSNull class]])
                 {
-                    [obj setValue:nil forKey:propertyName];
+                    [[[DBNullTypeConvertor alloc] init] convertToObjType:obj propertyName:mapItem.propertyName propertyDBValue:dic[coloumnName]];
                 }
                 else
                 {
-                    NSString *pAttributes = [obj propertyAttributesWithName:propertyName];
-                    if ([pAttributes rangeOfString:[[NSDate class] description]].location!=NSNotFound) {
-                        //对于NSDate类型的属性，将从字典中取出的字符串值转换为NSDate，再赋值给obj
-                        NSDate *d = [((NSString *)dic[coloumnName]) toDate];
-                        [obj setValue:d forKey:propertyName];
-                    }
-                    else
-                    {
-                        //对于非NSDate类型的属性，直接赋值给obj
-                        [obj setValue:dic[coloumnName] forKey:propertyName];
+                    if(mapItem.typeConvertor == nil){
+                        [[[DBDefaultTypeConvertor alloc] init] convertToObjType:obj propertyName:mapItem.propertyName propertyDBValue:dic[coloumnName]];
+                    }else{
+                        Class convClass = mapItem.typeConvertor;
+                        id<DBPTypeConvertorProtocol> convertor = [[convClass alloc] init];
+                        [convertor convertToObjType:obj propertyName:mapItem.propertyName propertyDBValue:dic[coloumnName]];
                     }
                 }
             }];

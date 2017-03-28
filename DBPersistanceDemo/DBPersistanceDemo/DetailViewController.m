@@ -1,48 +1,41 @@
 //
-//  ViewController.m
+//  DetailViewController.m
 //  DBPersistanceDemo
 //
-//  Created by ldy on 17/3/21.
+//  Created by ldy on 17/3/23.
 //  Copyright © 2017年 BJYN. All rights reserved.
 //
 
-#import "ViewController.h"
-#import "User.h"
 #import "DetailViewController.h"
 #import "HCGDatePickerAppearance.h"
 #import "LZCityPickerView.h"
 #import "LZCityPickerController.h"
 #import "UserTableOperator.h"
+#import "DBContant.h"
 
-@interface ViewController ()
+@interface DetailViewController ()
 @property (strong, nonatomic) IBOutlet UITextField *userIDTF;
 @property (strong, nonatomic) IBOutlet UITextField *heightTF;
 @property (strong, nonatomic) IBOutlet UIButton *ageBtn;
 @property (strong, nonatomic) IBOutlet UIButton *birthdayBtn;
 @property (strong, nonatomic) IBOutlet UIButton *addressBtn;
 @property (strong, nonatomic) IBOutlet UISwitch *marriedSwitch;
-@property (strong, nonatomic) IBOutlet UIButton *insertBtn;
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UIButton *editBtn;
+@property (strong, nonatomic) IBOutlet UIButton *deleteBtn;
 @property (strong, nonatomic) IBOutlet UIPickerView *agePicker;
 
 @property (strong, nonatomic) HCGDatePickerAppearance *datePicker;
-
-@property (strong, nonatomic) NSArray<User*> *users;
 @property (strong, nonatomic) NSDate *birthday;
 @property (strong, nonatomic) Address *address;
-
 @end
 
-@implementation ViewController
+@implementation DetailViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
-    [_tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:@"cell"];
-    _tableView.tableFooterView = [[UIView alloc] init];
-    
-    _agePicker.hidden = YES;
-    
+    // Do any additional setup after loading the view.
+    [self cancelEditState];
+    _userIDTF.enabled = NO;
     _datePicker = [[HCGDatePickerAppearance alloc]initWithDatePickerMode:DatePickerDateMode completeBlock:^(NSDate *date) {
         NSString *formatStr = @"yyyy年MM月dd日";
         NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
@@ -50,13 +43,11 @@
         [_birthdayBtn setTitle:[dateFormatter stringFromDate:date] forState:UIControlStateNormal];
         _birthday = date;
     }];
-}
-
-
--(void)viewWillAppear:(BOOL)animated{
-    UserTableOperator *tableOper = [[UserTableOperator alloc] init];
-    _users = [tableOper selectObjectWithWhereCondition:nil resultClass:[User class]];
-    [_tableView reloadData];
+    _agePicker.hidden = YES;
+    _birthday = _user.birthday;
+    _address = _user.address;
+    
+    [self setUIData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -72,6 +63,11 @@
     [_datePicker show];
 }
 
+-(void)setUser:(User *)user{
+    _user = user;
+    [self setUIData];
+}
+
 - (IBAction)addressBtnClicked:(id)sender {
     [LZCityPickerController showPickerInViewController:self selectBlock:^(NSString *address, NSString *province, NSString *city, NSString *area) {
         // 选择结果回调
@@ -84,39 +80,31 @@
         [self.addressBtn setTitle:address forState:UIControlStateNormal];
     }];
 }
-
-- (IBAction)insertBtnClicked:(id)sender {
-    User *user = [[User alloc] init];
-    user.userId = [_userIDTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    user.age = [_ageBtn.titleLabel.text integerValue];
-    user.birthday = _birthday;
-    user.married = _marriedSwitch.isOn;
-    user.height = [_heightTF.text floatValue];
-    user.address = _address;
-    
+- (IBAction)editBtnClicked:(UIButton*)sender {
+    if([sender.currentTitle isEqual: @"编辑"]){
+        [self setEditState];
+        [sender setTitle:@"更新" forState:UIControlStateNormal];
+    }else{
+        [self cancelEditState];
+        [sender setTitle:@"编辑" forState:UIControlStateNormal];
+        
+        User *user = [[User alloc] init];
+        user.userId = [_userIDTF.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        user.age = [_ageBtn.titleLabel.text integerValue];
+        user.birthday = _birthday;
+        user.married = _marriedSwitch.isOn;
+        user.height = [_heightTF.text floatValue];
+        user.address = _address;
+        UserTableOperator *tableOper = [[UserTableOperator alloc] init];
+        [tableOper insertWithObject:user updateIfExist:YES];
+    }
+}
+- (IBAction)deleteBtnClicked:(UIButton*)sender {
     UserTableOperator *tableOper = [[UserTableOperator alloc] init];
-    [tableOper insertWithObject:user updateIfExist:YES];
-    
-    _users = [tableOper selectObjectWithWhereCondition:nil resultClass:[User class]];
-    [_tableView reloadData];
+    [tableOper deleteWithPrimayKeyValues:[NSDictionary dictionaryWithObjectsAndKeys:_user.userId,User_Id, nil]];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
-#pragma UITableViewDelegate,UITableViewDataSource
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
-    return _users.count;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
-    cell.textLabel.text = _users[indexPath.row].userId;
-    return cell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
-    DetailViewController *detailVC = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"DetailViewControllerID"];
-    detailVC.user = _users[indexPath.row];
-    [self.navigationController pushViewController:detailVC animated:YES];
-}
 
 #pragma UIPickerViewDelegate,UIPickerViewDataSource
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView{
@@ -138,6 +126,33 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField{
     [textField resignFirstResponder];
     return YES;
+}
+
+-(void)setEditState{
+    _ageBtn.enabled = YES;
+    _birthdayBtn.enabled = YES;
+    _addressBtn.enabled = YES;
+    _marriedSwitch.enabled = YES;
+    _heightTF.enabled = YES;
+}
+-(void)cancelEditState{
+    _ageBtn.enabled = NO;
+    _birthdayBtn.enabled = NO;
+    _addressBtn.enabled = NO;
+    _marriedSwitch.enabled = NO;
+    _heightTF.enabled = NO;
+}
+
+-(void)setUIData{
+    _userIDTF.text = _user.userId;
+    [_ageBtn setTitle:[NSString stringWithFormat:@"%ld",_user.age] forState:UIControlStateNormal];
+    NSString *formatStr = @"yyyy年MM月dd日";
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setDateFormat:formatStr];
+    [_birthdayBtn setTitle:[dateFormatter stringFromDate:_user.birthday] forState:UIControlStateNormal];
+    [_addressBtn setTitle:[NSString stringWithFormat:@"%@%@%@",_user.address.province,_user.address.city,_user.address.area] forState:UIControlStateNormal];
+    [_marriedSwitch setOn:_user.married];
+    _heightTF.text = [NSString stringWithFormat:@"%f",_user.height];
 }
 
 @end

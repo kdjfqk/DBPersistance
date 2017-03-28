@@ -7,7 +7,6 @@
 //
 
 #import "DBPConvertor.h"
-#import "DBPConvertorProtocol.h"
 
 @interface UserConvertor : DBPConvertor<DBPConvertorProtocol>
 

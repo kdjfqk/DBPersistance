@@ -8,6 +8,9 @@
 
 #import "AppDelegate.h"
 #import "DBPersistance.h"
+#import "User.h"
+#import "NSObject+DBPExtension.h"
+#import "objc/runtime.h"
 
 @interface AppDelegate ()
 
@@ -19,6 +22,26 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     [DBPTableOperator setEncrypt:YES];
+    
+    User *user = [[User alloc] init];
+    user.userId = @"sdff";
+    user.age = 18;
+    user.birthday = [NSDate date];
+    user.height = 14.5;
+    user.married = NO;
+    user.address = [[Address alloc] init];
+    
+    //unsigned int count;
+    //objc_property_t *properties = class_copyPropertyList([user class], &count);
+    //NSLog(@"%@",properties[0]);
+    
+    NSLog(@"userId NSString : %@",[user propertyAttributesWithName:@"userId"]);
+    NSLog(@"age NSInteger : %@",[user propertyAttributesWithName:@"age"]);
+    NSLog(@"birthday NSDate : %@",[user propertyAttributesWithName:@"birthday"]);
+    NSLog(@"height CGFloat : %@",[user propertyAttributesWithName:@"height"]);
+    NSLog(@"married BOOL : %@",[user propertyAttributesWithName:@"married"]);
+    NSLog(@"address Address : %@",[user propertyAttributesWithName:@"address"]);
+    
     return YES;
 }
 
